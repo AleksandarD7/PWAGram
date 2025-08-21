@@ -4,5 +4,7 @@ Day 1: Started the course, opened the file and started with index.html and manif
 <br>
 Day 2: Finished manifest.json and started with service worker.
 <br>
-Day 3:Finished with service worker, learned how service workers work and how to register a service worker, also adding the app to home
+Day 3: Finished with service worker, learned how service workers work and how to register a service worker, also adding the app to home
 screen. And started with Promise and Fetch.
+<br>
+Day 4: Finished with fetch and promise, learned about promises-basics, fetch-basics, where and how we use promises and fetch.
