@@ -8,3 +8,5 @@ Day 3: Finished with service worker, learned how service workers work and how to
 screen. And started with Promise and Fetch.
 <br>
 Day 4: Finished with fetch and promise, learned about promises-basics, fetch-basics, where and how we use promises and fetch.
+<br>
+Day 5: Countinued with service workers also added a example post to see how it look on the feed.
