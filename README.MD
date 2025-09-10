@@ -10,3 +10,5 @@ screen. And started with Promise and Fetch.
 Day 4: Finished with fetch and promise, learned about promises-basics, fetch-basics, where and how we use promises and fetch.
 <br>
 Day 5: Countinued with service workers also added a example post to see how it look on the feed.
+<br>
+Day 6 (10.09.2025): Countinued with cathcing and added dynamic catching, the app is working offline 
