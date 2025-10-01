@@ -1,14 +1,14 @@
 var shareImageButton = document.querySelector('#share-image-button');
 var createPostArea = document.querySelector('#create-post');
 var closeCreatePostModalButton = document.querySelector('#close-create-post-modal-btn');
-var sharedMomentsArea = document.querySelector('#shared-moments');
+var sharedMomentsArea = document.querySelector('#shared-moments'); //These variables hold references to elements in the HTML
 
 function openCreatePostModal() {
   createPostArea.style.display = 'block';
   if (deferredPrompt) {
     deferredPrompt.prompt();
 
-    deferredPrompt.userChoice.then(function(choiceResult) {
+    deferredPrompt.userChoice.then(function(choiceResult) {  // Add to home screen prompt
       console.log(choiceResult.outcome);
 
       if (choiceResult.outcome === 'dismissed') {
@@ -51,13 +51,13 @@ function onSaveButtonClicked(event) {
   }
 }
 
-function clearCards() {
+function clearCards() {  // Clear old cards
   while(sharedMomentsArea.hasChildNodes()) {
     sharedMomentsArea.removeChild(sharedMomentsArea.lastChild);
   }
 }
 
-function createCard(data) {
+function createCard(data) {               // Create a card or post
   var cardWrapper = document.createElement('div');
   cardWrapper.className = 'shared-moment-card mdl-card mdl-shadow--2dp';
   var cardTitle = document.createElement('div');
@@ -77,24 +77,24 @@ function createCard(data) {
   cardSupportingText.style.textAlign = 'center';
   // var cardSaveButton = document.createElement('button');
   // cardSaveButton.textContent = 'Save';
-  // cardSaveButton.addEventListener('click', onSaveButtonClicked);
+  // cardSaveButton.addEventListener('click', onSaveButtonClicked);       // The code is on line 43, not in use currently
   // cardSupportingText.appendChild(cardSaveButton);
   cardWrapper.appendChild(cardSupportingText);
   componentHandler.upgradeElement(cardWrapper);
   sharedMomentsArea.appendChild(cardWrapper);
 }
 
-function updateUI(data) {
+function updateUI(data) {             // Before showing new cards, clear old ones so they are no duplicates
   clearCards();
   for (var i = 0; i < data.length; i++) {
     createCard(data[i]);
   }
 }
 
-var url = 'https://course-pwa-app-default-rtdb.firebaseio.com/posts.json';
+var url = 'https://course-pwa-app-default-rtdb.firebaseio.com/posts.json'; // connect to firebase database
 var networkDataReceived = false;
 
-fetch(url)
+fetch(url) // makes a request to the firebase database for posts
   .then(function(res) {
     return res.json();
   })
@@ -108,7 +108,7 @@ fetch(url)
     updateUI(dataArray);
   });
 
-if ('caches' in window) {
+if ('caches' in window) { // if there is a cache, we want to show cached data if there is no network connection
   caches.match(url)
     .then(function(response) {
       if (response) {
