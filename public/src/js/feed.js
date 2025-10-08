@@ -108,21 +108,12 @@ fetch(url) // makes a request to the firebase database for posts
     updateUI(dataArray);
   });
 
-if ('caches' in window) { // if there is a cache, we want to show cached data if there is no network connection
-  caches.match(url)
-    .then(function(response) {
-      if (response) {
-        return response.json();
-      }
-    })
-    .then(function(data) {
+if ('indexedDB' in window) { // if there is a cache, we want to show cached data if there is no network connection
+  readAllData('posts')  
+  .then(function(data) {
+    if (!networkDataReceived) {
       console.log('From cache', data);
-      if (!networkDataReceived) {
-        var dataArray = [];
-        for (var key in data) {
-          dataArray.push(data[key]);
-        }
-        updateUI(dataArray)
-      }
-    });
+      updateUI(data);
+    }
+  });
 }
