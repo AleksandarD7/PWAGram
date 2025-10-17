@@ -1,7 +1,7 @@
 importScripts('/src/js/idb.js');
 importScripts('/src/js/utility.js');
 
-var CACHE_STATIC_NAME = 'static-v18';
+var CACHE_STATIC_NAME = 'static-v27';
 var CACHE_DYNAMIC_NAME = 'dynamic-v2';
 var STATIC_FILES = [
   '/',
@@ -21,7 +21,6 @@ var STATIC_FILES = [
   'https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css'
 ];
 
-// Optional cache size limiter
 // function trimCache(cacheName, maxItems) {
 //   caches.open(cacheName)
 //     .then(function (cache) {
@@ -43,7 +42,7 @@ self.addEventListener('install', function (event) {
         console.log('[Service Worker] Precaching App Shell');
         cache.addAll(STATIC_FILES);
       })
-  );
+  )
 });
 
 self.addEventListener('activate', function (event) {
@@ -64,30 +63,33 @@ self.addEventListener('activate', function (event) {
 
 function isInArray(string, array) {
   var cachePath;
-  if (string.indexOf(self.origin) === 0) { 
-    cachePath = string.substring(self.origin.length);
+  if (string.indexOf(self.origin) === 0) { // request targets domain where we serve the page from (i.e. NOT a CDN)
+    console.log('matched ', string);
+    cachePath = string.substring(self.origin.length); // take the part of the URL AFTER the domain (e.g. after localhost:8080)
   } else {
-    cachePath = string; 
+    cachePath = string; // store the full request (for CDNs)
   }
   return array.indexOf(cachePath) > -1;
 }
 
 self.addEventListener('fetch', function (event) {
-  var url = 'https://course-pwa-app-default-rtdb.firebaseio.com/posts'; 
 
+  var url = 'https://course-pwa-app-default-rtdb.firebaseio.com/posts.json';
   if (event.request.url.indexOf(url) > -1) {
-    event.respondWith(
-      fetch(event.request)
-        .then(function (res) {
-          var clonedRes = res.clone();
-          clonedRes.json()
-            .then(function (data) {
-              for (var key in data) {
-                writeData('posts', data[key]);
-              }
-            });
-          return res;
-        })
+    event.respondWith(fetch(event.request)
+      .then(function (res) {
+        var clonedRes = res.clone();
+        clearAllData('posts')
+          .then(function () {
+            return clonedRes.json();
+          })
+          .then(function (data) {
+            for (var key in data) {
+              writeData('posts', data[key])
+            }
+          });
+        return res;
+      })
     );
   } else if (isInArray(event.request.url, STATIC_FILES)) {
     event.respondWith(
@@ -104,9 +106,10 @@ self.addEventListener('fetch', function (event) {
               .then(function (res) {
                 return caches.open(CACHE_DYNAMIC_NAME)
                   .then(function (cache) {
+                    // trimCache(CACHE_DYNAMIC_NAME, 3);
                     cache.put(event.request.url, res.clone());
                     return res;
-                  });
+                  })
               })
               .catch(function (err) {
                 return caches.open(CACHE_STATIC_NAME)
@@ -117,6 +120,99 @@ self.addEventListener('fetch', function (event) {
                   });
               });
           }
+        })
+    );
+  }
+});
+
+// self.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//     caches.match(event.request)
+//       .then(function(response) {
+//         if (response) {
+//           return response;
+//         } else {
+//           return fetch(event.request)
+//             .then(function(res) {
+//               return caches.open(CACHE_DYNAMIC_NAME)
+//                 .then(function(cache) {
+//                   cache.put(event.request.url, res.clone());
+//                   return res;
+//                 })
+//             })
+//             .catch(function(err) {
+//               return caches.open(CACHE_STATIC_NAME)
+//                 .then(function(cache) {
+//                   return cache.match('/offline.html');
+//                 });
+//             });
+//         }
+//       })
+//   );
+// });
+
+// self.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//     fetch(event.request)
+//       .then(function(res) {
+//         return caches.open(CACHE_DYNAMIC_NAME)
+//                 .then(function(cache) {
+//                   cache.put(event.request.url, res.clone());
+//                   return res;
+//                 })
+//       })
+//       .catch(function(err) {
+//         return caches.match(event.request);
+//       })
+//   );
+// });
+
+// Cache-only
+// self.addEventListener('fetch', function (event) {
+//   event.respondWith(
+//     caches.match(event.request)
+//   );
+// });
+
+// Network-only
+// self.addEventListener('fetch', function (event) {
+//   event.respondWith(
+//     fetch(event.request)
+//   );
+// });
+
+self.addEventListener('sync', function(event) {
+  console.log('[Service Worker] Background syncing', event);
+  if (event.tag === 'sync-new-posts') {
+    console.log('[Service Worker] Syncing new Posts');
+    event.waitUntil(
+      readAllData('sync-posts')
+        .then(function(data) {
+          for (var dt of data) {
+            fetch('https://course-pwa-app-default-rtdb.firebaseio.com/posts.json', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                id: dt.id,
+                title: dt.title,
+                location: dt.location,
+                image: 'https://firebasestorage.googleapis.com/v0/b/course-pwa-app.firebasestorage.app/o/sf-boat.jpg?alt=media&token=3557829f-6146-4ac0-8965-9a5d2a669575'
+              })
+            })
+              .then(function(res) {
+                console.log('Sent data', res);
+                if (res.ok) {
+                  deleteItemFromData('sync-posts', dt.id); // Isn't working correctly!
+                }
+              })
+              .catch(function(err) {
+                console.log('Error while sending data', err);
+              });
+          }
+
         })
     );
   }

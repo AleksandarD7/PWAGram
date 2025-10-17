@@ -22,3 +22,5 @@ Day 9 (26.09.2025): Countinued with firebase storage and firebase realtime data 
 Day 10 (01.10.2025): Going over the code of the PWA app and taking notes.
 <br>
 Day 11 (08.10.2025): Countinued with IndexDB and Dynamic Data Section. Added utility.js added some code for indexDB in sw.js also in feed.js
+<br>
+Day 12 (17.10.2025): Countinued and finished with the progressive web design(added media quary, responsive for mobile device...). Also started and almost finished with background sync, so it can save data about the post on firebase database. 
