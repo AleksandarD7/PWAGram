@@ -1,7 +1,7 @@
 importScripts('/src/js/idb.js');
 importScripts('/src/js/utility.js');
 
-var CACHE_STATIC_NAME = 'static-v27';
+var CACHE_STATIC_NAME = 'static-v28';
 var CACHE_DYNAMIC_NAME = 'dynamic-v2';
 var STATIC_FILES = [
   '/',
@@ -74,7 +74,7 @@ function isInArray(string, array) {
 
 self.addEventListener('fetch', function (event) {
 
-  var url = 'https://course-pwa-app-default-rtdb.firebaseio.com/posts.json';
+  var url = 'https://storepostdata-24oz3ndbmq-uc.a.run.app';
   if (event.request.url.indexOf(url) > -1) {
     event.respondWith(fetch(event.request)
       .then(function (res) {
@@ -205,7 +205,10 @@ self.addEventListener('sync', function(event) {
               .then(function(res) {
                 console.log('Sent data', res);
                 if (res.ok) {
-                  deleteItemFromData('sync-posts', dt.id); // Isn't working correctly!
+                  res.json().then(function(resData) {
+                    console.log('Response Data', resData);
+                  });
+                  deleteItemFromData('sync-posts', resData.id);
                 }
               })
               .catch(function(err) {

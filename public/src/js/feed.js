@@ -125,7 +125,7 @@ if ('indexedDB' in window) {
 }
 
 function sendData() {
-  fetch('https://course-pwa-app-default-rtdb.firebaseio.com/posts.json', {
+  fetch('https://storepostdata-24oz3ndbmq-uc.a.run.app', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
