@@ -1,0 +1,77 @@
+[debug] [2025-12-10T16:21:13.523Z] ----------------------------------------------------------------------
+[debug] [2025-12-10T16:21:13.527Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\user\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js functions:shell
+[debug] [2025-12-10T16:21:13.528Z] CLI Version:   14.23.0
+[debug] [2025-12-10T16:21:13.528Z] Platform:      win32
+[debug] [2025-12-10T16:21:13.529Z] Node Version:  v22.18.0
+[debug] [2025-12-10T16:21:13.530Z] Time:          Wed Dec 10 2025 17:21:13 GMT+0100 (Средноевропско стандардно време)
+[debug] [2025-12-10T16:21:13.530Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-12-10T16:21:13.536Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-12-10T16:21:13.972Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-12-10T16:21:13.973Z] > authorizing via signed-in user (aleksandar.dimovski09@gmail.com)
+[debug] [2025-12-10T16:21:13.973Z] [iam] checking project course-pwa-app for permissions ["firebase.projects.get"]
+[debug] [2025-12-10T16:21:13.974Z] Checked if tokens are valid: false, expires at: 1762965992652
+[debug] [2025-12-10T16:21:13.974Z] Checked if tokens are valid: false, expires at: 1762965992652
+[debug] [2025-12-10T16:21:13.974Z] > refreshing access token with scopes: []
+[debug] [2025-12-10T16:21:13.975Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-12-10T16:21:13.976Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-12-10T16:21:14.200Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-12-10T16:21:14.200Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-12-10T16:21:14.238Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/course-pwa-app:testIamPermissions [none]
+[debug] [2025-12-10T16:21:14.239Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/course-pwa-app:testIamPermissions x-goog-quota-user=projects/course-pwa-app
+[debug] [2025-12-10T16:21:14.239Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/course-pwa-app:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-12-10T16:21:14.318Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-12-10T16:21:14.319Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-12-10T16:21:14.554Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/course-pwa-app:testIamPermissions 200
+[debug] [2025-12-10T16:21:14.554Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/course-pwa-app:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-12-10T16:21:14.555Z] Emulator locator file path: C:\Users\user\AppData\Local\Temp\hub-course-pwa-app.json
+[debug] [2025-12-10T16:21:14.569Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-12-10T16:21:14.632Z] defaultcredentials: writing to file C:\Users\user\AppData\Roaming\firebase\aleksandar_dimovski09_gmail.com_application_default_credentials.json
+[debug] [2025-12-10T16:21:14.635Z] DEBUG: Setting GAC to C:\Users\user\AppData\Roaming\firebase\aleksandar_dimovski09_gmail.com_application_default_credentials.json
+[debug] [2025-12-10T16:21:14.636Z] Checked if tokens are valid: true, expires at: 1765387273200
+[debug] [2025-12-10T16:21:14.636Z] Checked if tokens are valid: true, expires at: 1765387273200
+[debug] [2025-12-10T16:21:14.636Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/course-pwa-app/adminSdkConfig [none]
+[debug] [2025-12-10T16:21:15.260Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/course-pwa-app/adminSdkConfig 200
+[debug] [2025-12-10T16:21:15.261Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/course-pwa-app/adminSdkConfig {"projectId":"course-pwa-app","databaseURL":"https://course-pwa-app-default-rtdb.firebaseio.com","storageBucket":"course-pwa-app.firebasestorage.app"}
+[debug] [2025-12-10T16:21:15.277Z] [functions] Watching "C:\Users\user\Downloads\course-project-starting-setup\functions" for Cloud Functions...
+[debug] [2025-12-10T16:21:15.286Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2025-12-10T16:21:16.547Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "web-push": "web-push generate-vapid-keys"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "firebase-admin": "^12.7.0",
+    "firebase-functions": "^6.0.1",
+    "web-push": "^3.6.7"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-12-10T16:21:16.547Z] Building nodejs source
+[debug] [2025-12-10T16:21:16.547Z] Failed to find version of module node: reached end of search path C:\Users\user\Downloads\course-project-starting-setup\functions\node_modules
+[info] +  functions: Using node@22 from host. 
+[debug] [2025-12-10T16:21:16.551Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-12-10T16:21:16.565Z] Found firebase-functions binary at 'C:\Users\user\Downloads\course-project-starting-setup\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8443
+
+[debug] [2025-12-10T16:21:18.208Z] Got response from /__/functions.yaml {"endpoints":{"storePostData":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"storePostData"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[debug] [2025-12-10T16:21:22.265Z] [functions] Loaded functions definitions from source: storePostData.
+[debug] [2025-12-10T16:21:22.265Z] [functions[us-central1-storePostData]] http function initialized (http://127.0.0.1:5000/course-pwa-app/us-central1/storePostData).
+[info] i  functions: Loaded functions: storePostData 
+[warn] !  functions: The following emulators are not running, calls to these services will affect production: firestore, database, pubsub, storage, eventarc, tasks 

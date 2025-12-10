@@ -1,7 +1,7 @@
 importScripts('/src/js/idb.js');
 importScripts('/src/js/utility.js');
 
-var CACHE_STATIC_NAME = 'static-v28';
+var CACHE_STATIC_NAME = 'static-v29';
 var CACHE_DYNAMIC_NAME = 'dynamic-v2';
 var STATIC_FILES = [
   '/',
@@ -220,3 +220,26 @@ self.addEventListener('sync', function(event) {
     );
   }
 });
+
+
+self.addEventListener('notificationclick', function(event) {
+  var notification = event.notification;
+  var action = event.action;
+
+  console.log(notification);
+
+  if (action === 'confirm') {
+    console.log('Confirm was chosen');
+    notification.close();
+  } else {
+    console.log(action);
+    notification.close();
+  }
+});
+
+self.addEventListener('notificationclose', function(event) {
+  console.log('Notification was closed', event);
+});
+
+
+
